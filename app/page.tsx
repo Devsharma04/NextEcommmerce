@@ -1,102 +1,437 @@
+"use client";
 import Image from "next/image";
+import {
+  Search,
+  MapPin,
+  Briefcase,
+  Users,
+  TrendingUp,
+  Star,
+  ChevronRight,
+  Play,
+  CheckCircle,
+  Building,
+  Clock,
+  DollarSign,
+} from "lucide-react";
+import { useState } from "react";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [searchQuery, setSearchQuery] = useState("");
+  const [location, setLocation] = useState("");
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const featuredJobs = [
+    {
+      title: "Senior Frontend Developer",
+      company: "TechCorp",
+      location: "Mumbai, India",
+      salary: "₹15-25 LPA",
+      type: "Full-time",
+      logo: "💻",
+      skills: ["React", "TypeScript", "Next.js"],
+    },
+    {
+      title: "Data Scientist",
+      company: "DataViz Inc",
+      location: "Bangalore, India",
+      salary: "₹20-30 LPA",
+      type: "Remote",
+      logo: "📊",
+      skills: ["Python", "ML", "SQL"],
+    },
+    {
+      title: "Product Manager",
+      company: "StartupXYZ",
+      location: "Delhi, India",
+      salary: "₹18-28 LPA",
+      type: "Hybrid",
+      logo: "🚀",
+      skills: ["Strategy", "Analytics", "Leadership"],
+    },
+  ];
+
+  const topCompanies = [
+    { name: "Google", logo: "🔍", jobs: "2.5k+" },
+    { name: "Microsoft", logo: "🪟", jobs: "1.8k+" },
+    { name: "Amazon", logo: "📦", jobs: "3.2k+" },
+    { name: "Flipkart", logo: "🛒", jobs: "1.2k+" },
+    { name: "Zomato", logo: "🍕", jobs: "800+" },
+    { name: "Paytm", logo: "💳", jobs: "1.5k+" },
+  ];
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+      {/* Header */}
+      <header className="bg-white/80 backdrop-blur-md border-b border-white/20 sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <div className="flex items-center space-x-2">
+              <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center">
+                <Briefcase className="w-6 h-6 text-white" />
+              </div>
+              <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                JobDekho
+              </span>
+            </div>
+
+            <nav className="hidden md:flex space-x-8">
+              <a
+                href="#"
+                className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
+              >
+                Jobs
+              </a>
+              <a
+                href="#"
+                className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
+              >
+                Companies
+              </a>
+              <a
+                href="#"
+                className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
+              >
+                Resources
+              </a>
+              <a
+                href="#"
+                className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
+              >
+                About
+              </a>
+            </nav>
+
+            <div className="flex items-center space-x-4">
+              <button className="text-gray-700 hover:text-blue-600 transition-colors font-medium">
+                Sign In
+              </button>
+              <button className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-2 rounded-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+                Post Job
+              </button>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+      </header>
+
+      {/* Hero Section */}
+      <section className="relative py-20 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-indigo-600/10"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="text-center mb-12">
+            <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight">
+              Find Your
+              <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent block">
+                Dream Job
+              </span>
+            </h1>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+              Discover thousands of opportunities from top companies. Your next
+              career move is just a search away.
+            </p>
+
+            {/* Quick Stats */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl mx-auto">
+              <div className="text-center">
+                <div className="text-3xl font-bold text-blue-600 mb-2">
+                  50K+
+                </div>
+                <div className="text-gray-600">Active Jobs</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-indigo-600 mb-2">
+                  10K+
+                </div>
+                <div className="text-gray-600">Companies</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-purple-600 mb-2">
+                  1M+
+                </div>
+                <div className="text-gray-600">Job Seekers</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-pink-600 mb-2">95%</div>
+                <div className="text-gray-600">Success Rate</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Jobs */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              Featured Jobs
+            </h2>
+            <p className="text-xl text-gray-600">
+              Hand-picked opportunities from top employers
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {featuredJobs.map((job, index) => (
+              <div
+                key={index}
+                className="bg-gradient-to-br from-white to-gray-50 rounded-2xl p-6 border border-gray-200 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group"
+              >
+                <div className="flex items-start justify-between mb-4">
+                  <div className="text-4xl">{job.logo}</div>
+                  <span className="bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full font-medium">
+                    {job.type}
+                  </span>
+                </div>
+
+                <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                  {job.title}
+                </h3>
+                <p className="text-gray-600 mb-2 font-medium">{job.company}</p>
+
+                <div className="flex items-center text-gray-500 text-sm mb-4 space-x-4">
+                  <div className="flex items-center">
+                    <MapPin className="w-4 h-4 mr-1" />
+                    {job.location}
+                  </div>
+                  <div className="flex items-center">
+                    <DollarSign className="w-4 h-4 mr-1" />
+                    {job.salary}
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {job.skills.map((skill, skillIndex) => (
+                    <span
+                      key={skillIndex}
+                      className="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+
+                <button className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 rounded-xl hover:shadow-lg transition-all duration-300 transform group-hover:scale-105 font-semibold">
+                  Apply Now
+                </button>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <button className="bg-gray-100 hover:bg-gray-200 text-gray-800 px-8 py-4 rounded-xl transition-all duration-300 font-semibold inline-flex items-center">
+              View All Jobs
+              <ChevronRight className="w-5 h-5 ml-2" />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Top Companies */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              Top Companies Hiring
+            </h2>
+            <p className="text-xl text-gray-600">
+              Join thousands of professionals at leading companies
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+            {topCompanies.map((company, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-2xl p-6 text-center hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 border border-gray-200"
+              >
+                <div className="text-4xl mb-3">{company.logo}</div>
+                <h3 className="font-bold text-gray-900 mb-1">{company.name}</h3>
+                <p className="text-sm text-gray-600">{company.jobs} jobs</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              Why Choose JobDekho?
+            </h2>
+            <p className="text-xl text-gray-600">
+              Everything you need to find your perfect job
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100">
+              <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <Search className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                Smart Job Matching
+              </h3>
+              <p className="text-gray-600">
+                Our AI-powered algorithm matches you with jobs that fit your
+                skills and preferences perfectly.
+              </p>
+            </div>
+
+            <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-green-50 to-emerald-50 border border-green-100">
+              <div className="w-16 h-16 bg-gradient-to-r from-green-600 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <Users className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                Networking
+              </h3>
+              <p className="text-gray-600">
+                Connect with industry professionals and expand your network to
+                unlock hidden opportunities.
+              </p>
+            </div>
+
+            <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-purple-50 to-pink-50 border border-purple-100">
+              <div className="w-16 h-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <TrendingUp className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                Career Growth
+              </h3>
+              <p className="text-gray-600">
+                Access career resources, skill assessments, and personalized
+                career advice to accelerate your growth.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-gradient-to-r from-blue-600 to-indigo-600">
+        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            Ready to Start Your Journey?
+          </h2>
+          <p className="text-xl text-blue-100 mb-8">
+            Join millions of job seekers who found their dream careers through
+            JobDekho
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button className="bg-white text-blue-600 px-8 py-4 rounded-xl font-bold text-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+              Create Your Profile
+            </button>
+            <button className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-white hover:text-blue-600 transition-all duration-300">
+              Browse Jobs
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div>
+              <div className="flex items-center space-x-2 mb-4">
+                <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center">
+                  <Briefcase className="w-5 h-5 text-white" />
+                </div>
+                <span className="text-xl font-bold">JobDekho</span>
+              </div>
+              <p className="text-gray-400 mb-4">
+                Connecting talent with opportunity. Your career success is our
+                mission.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="font-bold mb-4">For Job Seekers</h3>
+              <ul className="space-y-2 text-gray-400">
+                <li>
+                  <a href="#" className="hover:text-white transition-colors">
+                    Browse Jobs
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition-colors">
+                    Career Advice
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition-colors">
+                    Resume Builder
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition-colors">
+                    Salary Guide
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="font-bold mb-4">For Employers</h3>
+              <ul className="space-y-2 text-gray-400">
+                <li>
+                  <a href="#" className="hover:text-white transition-colors">
+                    Post Jobs
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition-colors">
+                    Find Talent
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition-colors">
+                    Pricing
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition-colors">
+                    Enterprise
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="font-bold mb-4">Company</h3>
+              <ul className="space-y-2 text-gray-400">
+                <li>
+                  <a href="#" className="hover:text-white transition-colors">
+                    About Us
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition-colors">
+                    Contact
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition-colors">
+                    Privacy Policy
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition-colors">
+                    Terms of Service
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+            <p>
+              &copy; 2025 JobDekho. All rights reserved. Built with ❤️ for job
+              seekers everywhere.
+            </p>
+          </div>
+        </div>
       </footer>
     </div>
   );

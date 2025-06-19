@@ -6,20 +6,11 @@ import {
   Briefcase,
   Users,
   TrendingUp,
-  Star,
   ChevronRight,
-  Play,
-  CheckCircle,
-  Building,
-  Clock,
   DollarSign,
 } from "lucide-react";
-import { useState } from "react";
 
 export default function Home() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [location, setLocation] = useState("");
-
   const featuredJobs = [
     {
       title: "Senior Frontend Developer",
@@ -51,68 +42,16 @@ export default function Home() {
   ];
 
   const topCompanies = [
-    { name: "Google", logo: "🔍", jobs: "2.5k+" },
-    { name: "Microsoft", logo: "🪟", jobs: "1.8k+" },
-    { name: "Amazon", logo: "📦", jobs: "3.2k+" },
-    { name: "Flipkart", logo: "🛒", jobs: "1.2k+" },
-    { name: "Zomato", logo: "🍕", jobs: "800+" },
-    { name: "Paytm", logo: "💳", jobs: "1.5k+" },
+    { name: "Google", logo: "/logos/google.png", jobs: "2.5k+" },
+    { name: "Microsoft", logo: "/logos/microsoft.png", jobs: "1.8k+" },
+    { name: "Amazon", logo: "/logos/amazon.png", jobs: "3.2k+" },
+    { name: "Flipkart", logo: "/logos/flipkart.png", jobs: "1.2k+" },
+    { name: "Zomato", logo: "/logos/zomato.png", jobs: "800+" },
+    { name: "Paytm", logo: "/logos/paytm.png", jobs: "1.5k+" },
   ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
-      {/* Header */}
-      <header className="bg-white/80 backdrop-blur-md border-b border-white/20 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center space-x-2">
-              <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center">
-                <Briefcase className="w-6 h-6 text-white" />
-              </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                JobDekho
-              </span>
-            </div>
-
-            <nav className="hidden md:flex space-x-8">
-              <a
-                href="#"
-                className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
-              >
-                Jobs
-              </a>
-              <a
-                href="#"
-                className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
-              >
-                Companies
-              </a>
-              <a
-                href="#"
-                className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
-              >
-                Resources
-              </a>
-              <a
-                href="#"
-                className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
-              >
-                About
-              </a>
-            </nav>
-
-            <div className="flex items-center space-x-4">
-              <button className="text-gray-700 hover:text-blue-600 transition-colors font-medium">
-                Sign In
-              </button>
-              <button className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-2 rounded-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105">
-                Post Job
-              </button>
-            </div>
-          </div>
-        </div>
-      </header>
-
       {/* Hero Section */}
       <section className="relative py-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-indigo-600/10"></div>
@@ -244,7 +183,13 @@ export default function Home() {
                 key={index}
                 className="bg-white rounded-2xl p-6 text-center hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 border border-gray-200"
               >
-                <div className="text-4xl mb-3">{company.logo}</div>
+                <Image
+                  src={company.logo}
+                  alt="logos"
+                  height={70}
+                  width={70}
+                  className="text-4xl m-auto"
+                />
                 <h3 className="font-bold text-gray-900 mb-1">{company.name}</h3>
                 <p className="text-sm text-gray-600">{company.jobs} jobs</p>
               </div>
